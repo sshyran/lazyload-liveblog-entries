@@ -48,7 +48,7 @@ class Liveblog_Lazyloader {
 	 */
 	public function liveblog_query_args( $args, $state ) {
 
-		$args['number'] = 5;
+		$args['number'] = self::$posts_initial;
 
 		add_filter( 'the_comments', array( $this, 'liveblog_get_earliest_timestamp' ) );
 
@@ -80,7 +80,6 @@ class Liveblog_Lazyloader {
 		);
 
 		wp_enqueue_script( 'lazyload-liveblog-entries',
-			//plugins_url( 'assets/js/src/LiveblogLazyloader.js', __FILE__ ),
 			plugins_url( 'assets/js/lazyload-liveblog-entries.js', __FILE__ ),
 			array(), false, true );
 
