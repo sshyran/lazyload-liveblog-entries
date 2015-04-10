@@ -17,8 +17,8 @@
 		self.init = function( options ) {
 			self.$el.after( self.$indicator );
 			self.options = options;
-            self.postsPerPage = parseInt( options.posts_per_page, 10 );
-			setTimeout( self.loadMore );
+			self.postsPerPage = parseInt( options.posts_per_page, 10 );
+			self.requestAnimationFrame( self.loadMore );
 		};
 
 		/**
@@ -45,7 +45,15 @@
 				}
 			);
 		};
+	
 
+		/**
+		 * Shim for requestAnimationFrame
+		 *
+		 */
+		self.requestAnimationFrame = function(){
+			 return ( window.requestAnimationFrame || function(/* function */ fn){ window.setTimeout(fn); } );
+		 }();
 
 		/**
 		 * Show spinner indicator when loading more entries.
@@ -87,7 +95,7 @@
 			self.loading(false);
 
 			if ( self.entries.length ) {
-				setTimeout( self.renderEntriesPage );
+				self.requestAnimationFrame( self.renderEntriesPage );
 			}
 		};
 
