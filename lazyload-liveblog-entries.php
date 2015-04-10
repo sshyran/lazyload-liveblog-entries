@@ -16,7 +16,7 @@ class Liveblog_Lazyloader {
 
 	protected $key;
 
-	protected static $posts_intitial = 5;
+	protected static $posts_initial = 5;
 	protected static $posts_per_page = 10;
 
 	protected $post;
