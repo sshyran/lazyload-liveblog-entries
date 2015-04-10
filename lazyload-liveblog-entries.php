@@ -80,6 +80,7 @@ class Liveblog_Lazyloader {
 		);
 
 		wp_enqueue_script( 'lazyload-liveblog-entries',
+			//plugins_url( 'assets/js/src/LiveblogLazyloader.js', __FILE__ ),
 			plugins_url( 'assets/js/lazyload-liveblog-entries.js', __FILE__ ),
 			array(), false, true );
 

@@ -8,7 +8,6 @@
 		self.options = {};
 		self.entries = [];
 
-
 		/**
 		 * Initialize lazyloader with options passed from wp_enqueue_script.
 		 *
@@ -57,12 +56,32 @@
 					timestamp = $e.data('timestamp');
 
 				if ( timestamp < self.options.earliest_timestamp ) {
-					self.options.earliest_timestamp = timestamp - 1;
+					self.options.earliest_timestamp = timestamp;
 				}
 			});
 
+			self.updateTimes();
+
 			if ( self.entries.length ) {
 				setTimeout( self.renderEntriesPage );
+			}
+		};
+
+
+		/**
+		 * Update the timestamps on newly inserted entries.
+		 *
+		 * Liveblog plugin only updates timestamps once a minute. This looks
+		 * awkward on archived livblogs, where for example all of the entries
+		 * should have human time diffed timestamps, but the newly inserted
+		 * ones just have `3:21pm` - type stamps.
+		 */
+		self.updateTimes = function() {
+
+			if ( typeof liveblog != 'undefined' && 
+					typeof liveblog.entriesContainer != 'undefined' && 
+					typeof liveblog.entriesContainer.updateTimes != 'undefined' ) {
+				liveblog.entriesContainer.updateTimes();
 			}
 		};
 

@@ -30,7 +30,8 @@
     "uglifyify": "^3.0.1"
   },
   "browserify-shim": {
-    "jquery": "global:jQuery"
+    "jquery": "global:jQuery",
+    "liveblog": "global:liveblog"
   },
   "browserify": {
     "transform": [ "browserify-shim", "uglifyify" ]
