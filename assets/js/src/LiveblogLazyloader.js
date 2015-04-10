@@ -4,16 +4,20 @@
 
 		var self = this;
 
-		self.$el     = $('#liveblog-entries');
-		self.options = {};
-		self.entries = [];
+		self.$el        = $('#liveblog-entries');
+		self.$indicator = $('<div id="liveblog-lazyload-spinner"></div>');
+		self.$spinner   = $('<div class="spinner" style="position:relative; margin: 1em auto;"></div>');
+		self.options    = {};
+		self.entries    = [];
 
 		/**
 		 * Initialize lazyloader with options passed from wp_enqueue_script.
 		 *
 		 */
 		self.init = function( options ) {
+			self.$el.after( self.$indicator );
 			self.options = options;
+            self.postsPerPage = parseInt( options.posts_per_page, 10 );
 			setTimeout( self.loadMore );
 		};
 
@@ -23,19 +27,36 @@
 		 *
 		 */
 		self.loadMore = function() {
+
+			self.loading(true);
+
 			$.get( self.ajaxRequestUrl(), {},
 				function(response) {
+
+					self.loading(false);
 
 					/*
 					 * Since the response will be ascending order,
 					 * reverse it before processing it.
 					 */
-					
 					self.entries = response.entries.reverse();
 
 					self.renderEntriesPage();
 				}
 			);
+		};
+
+
+		/**
+		 * Show spinner indicator when loading more entries.
+		 *
+		 */
+		self.loading = function( isLoading ) {
+			if ( isLoading ) {
+				self.$spinner.appendTo( self.$indicator );
+			} else {
+				self.$spinner.detach();
+			}
 		};
 
 
@@ -46,6 +67,8 @@
 		 * the liveblog content element.
 		 */
 		self.renderEntriesPage = function() {
+
+			self.loading(true);
 
 			var entries = self.entries.slice( 0, self.postsPerPage );
 			self.entries = self.entries.slice( self.postsPerPage );
@@ -61,6 +84,7 @@
 			});
 
 			self.updateTimes();
+			self.loading(false);
 
 			if ( self.entries.length ) {
 				setTimeout( self.renderEntriesPage );
@@ -77,7 +101,6 @@
 		 * ones just have `3:21pm` - type stamps.
 		 */
 		self.updateTimes = function() {
-
 			if ( typeof liveblog != 'undefined' && 
 					typeof liveblog.entriesContainer != 'undefined' && 
 					typeof liveblog.entriesContainer.updateTimes != 'undefined' ) {
