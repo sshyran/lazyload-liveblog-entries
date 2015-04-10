@@ -95,5 +95,14 @@ function liveblog_lazyloader_init() {
 	$liveblog_lazyloader = new Liveblog_Lazyloader();
 }
 
-add_action( 'plugins_loaded', 'liveblog_lazyloader_init', 1000 );
+/*
+ * Allow this to work if required in a theme rather than being loaded with plugins.
+ *
+ * (The priority: 1000 is there to make sure this loads after liveblog, which is initialized at priority 999.)
+ */
+if ( did_action( 'plugins_loaded' ) ) {
+	liveblog_lazyloader_init();
+} else {
+	add_action( 'plugins_loaded', 'liveblog_lazyloader_init', 1000 );
+}
 
