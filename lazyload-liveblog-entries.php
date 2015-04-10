@@ -90,10 +90,6 @@ class Liveblog_Lazyloader {
 
 }
 
-function liveblog_lazyloader_init() {
-	global $liveblog_lazyloader;
-	$liveblog_lazyloader = new Liveblog_Lazyloader();
-}
+global $liveblog_lazyloader;
 
-add_action( 'plugins_loaded', 'liveblog_lazyloader_init', 1000 );
-
+$liveblog_lazyloader = new Liveblog_Lazyloader();
