@@ -10,7 +10,9 @@ Text Domain: lazyload-liveblog-entries
 Domain Path: /languages
  */
 
-class Liveblog_Lazyloader {
+class Lazyload_Liveblog_Entries {
+
+	private static $instance;
 
 	protected $query_vars = array();
 
@@ -22,12 +24,17 @@ class Liveblog_Lazyloader {
 	protected $post;
 	protected $permalink;
 
-	public function __construct() {
+	public static function get_instance() {
 
-		add_filter( 'liveblog_display_archive_query_args',
-			array( $this, 'liveblog_query_args' ), 20, 2
-		);
+		if ( ! isset( self::$instance ) ) {
+			self::$instance = new Lazyload_Liveblog_Entries;
+			self::$instance->setup_filters();
+		}
+		return self::$instance;
+	}
 
+	private function setup_filters() {
+		add_filter( 'liveblog_display_archive_query_args', array( $this, 'liveblog_query_args' ), 20, 2 );
 	}
 
 	/**
@@ -90,6 +97,8 @@ class Liveblog_Lazyloader {
 
 }
 
-global $liveblog_lazyloader;
+function Lazyload_Liveblog_Entries() {
+	return Lazyload_Liveblog_Entries::get_instance();
+}
+add_action( 'init', 'Lazyload_Liveblog_Entries' );
 
-$liveblog_lazyloader = new Liveblog_Lazyloader();
