@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     browserify: {
       plugin: {
         files: {
-          'assets/js/lazyload-liveblog-entries.js': ['assets/js/src/LiveblogLazyloader.js']
+          'assets/js/build/lazyload-liveblog-entries.js': ['assets/js/src/lazyload-liveblog-entries.js']
         }
       }
 
