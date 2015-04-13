@@ -40,6 +40,8 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-watch');
 
+  grunt.registerTask('readme', ['wp_readme_to_markdown']);
+
   grunt.registerTask('default', ['jshint','browserify']);
 
 };

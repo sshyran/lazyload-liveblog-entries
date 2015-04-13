@@ -1,5 +1,5 @@
 === Lazyload-liveblog-entries ===
-Contributors: goldenapples  
+Contributors: goldenapples, fusionengineering
 Tags: liveblog
 Requires at least: 3.5
 Tested up to: 4.2
