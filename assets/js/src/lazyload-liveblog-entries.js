@@ -1,6 +1,6 @@
 (function($) {
 
-	LiveblogLazyloader = function() {
+	LazyloadLiveblogEntries = function() {
 
 		var self = this;
 
