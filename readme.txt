@@ -33,5 +33,6 @@ all visible content is loaded and ready.
 
 == Changelog ==
 
-= 0.1 Initial release
+= 0.1 =
 
+* Initial release
