@@ -14,7 +14,7 @@ Improves the pagespeed and load time of large liveblogs by lazy-loading entries.
 When using the [liveblog](https://wordpress.org/plugins/liveblog/) plugin
 developed by Automattic, liveblogs with lots of entries, especially if
 they take advantage of the oEmbed functionality to render content from
-third-party providers liek Twitter or Vine, can take an inordinate amout
+third-party providers like Twitter or Vine, can take an inordinate amout
 of time to load. This issue stems from embed handlers from these providers
 scanning the entire markup of the document, and replacing numerous divs of
 markup in the content at once, making the page unresponsive as the DOM
