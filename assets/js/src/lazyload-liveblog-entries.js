@@ -126,11 +126,12 @@
 		 */
 		self.ajaxRequestUrl = function() {
 			return [
-				self.options.permalink,              // Post permalink
-				self.options.liveblog_endpoint,      // 'liveblog' slug
+				liveblog_settings.endpoint_url,
 				'0',                                 // from_timestamp: Go all the back
+				'/',
 				self.options.earliest_timestamp - 1, // to_timestamp: Earliest entry already fetched.
-			].join('/') + '/';
+				'/',
+			].join('');
 		};
 
 
