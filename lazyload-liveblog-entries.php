@@ -80,6 +80,8 @@ class Lazyload_Liveblog_Entries {
 
 		$this->query_vars = array(
 			'post_id'            => get_queried_object_id(),
+			'permalink'          => untrailingslashit( get_permalink( get_queried_object_id() ) ),
+			'liveblog_endpoint'  => WPCOM_Liveblog::url_endpoint,
 			'posts_per_page'     => self::$posts_per_page,
 			'earliest_timestamp' => $earliest_timestamp,
 		);
