@@ -130,7 +130,7 @@
 				'0',                                 // from_timestamp: Go all the back
 				'/',
 				self.options.earliest_timestamp - 1, // to_timestamp: Earliest entry already fetched.
-				'/',
+				'/'
 			].join('');
 		};
 
